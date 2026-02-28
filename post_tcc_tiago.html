@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post TCC – Tiago Alves dos Santos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #D4A853;
+    --gold-light: #F0C96A;
+    --dark: #0D0D0D;
+    --surface: #141414;
+    --surface2: #1C1C1C;
+    --text: #F5F0E8;
+    --muted: #8A8478;
+    --accent: #4ECDC4;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 60px;
+    gap: 32px;
+  }
+
+  /* ── HEADER ── */
+  .page-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  /* ══════════════════════════════════════
+     CARD PRINCIPAL (estilo Instagram)
+  ══════════════════════════════════════ */
+  .card {
+    width: 100%;
+    max-width: 560px;
+    background: var(--surface);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,168,83,0.15);
+    position: relative;
+  }
+
+  /* faixa decorativa topo */
+  .card-header-strip {
+    height: 6px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--accent) 100%);
+  }
+
+  .card-hero {
+    padding: 40px 36px 28px;
+    background: radial-gradient(ellipse at top right, rgba(212,168,83,0.08) 0%, transparent 70%);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(212,168,83,0.15);
+    border: 1px solid rgba(212,168,83,0.35);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .card-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .card-hero h1 span {
+    color: var(--gold);
+  }
+
+  .card-hero .sub {
+    font-size: 13.5px;
+    color: var(--muted);
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 420px;
+  }
+
+  .score-pill {
+    position: absolute;
+    top: 36px;
+    right: 36px;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(212,168,83,0.4);
+  }
+
+  .score-pill .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1;
+  }
+
+  .score-pill .label {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(13,13,13,0.7);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── CORPO ── */
+  .card-body {
+    padding: 28px 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .intro-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text);
+    opacity: 0.9;
+  }
+
+  .intro-text strong {
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  .intro-text em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* ── BLOCO DE DESTAQUE ── */
+  .highlight-block {
+    background: var(--surface2);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    opacity: 0.88;
+  }
+
+  /* ── PILARES ── */
+  .pillars-title {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .pillar {
+    background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .pillar:hover { border-color: rgba(212,168,83,0.3); }
+
+  .pillar-icon {
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .pillar-text { display: flex; flex-direction: column; gap: 2px; }
+  .pillar-name { font-size: 12.5px; font-weight: 600; color: var(--text); }
+  .pillar-desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* ── RESULTADOS ── */
+  .results-title {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .results-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .result-chip {
+    flex: 1;
+    min-width: 100px;
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .result-chip .val {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .result-chip .desc {
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-top: 3px;
+  }
+
+  /* ── CTA ── */
+  .cta-text {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text);
+    opacity: 0.85;
+    text-align: center;
+  }
+
+  .cta-text strong { color: var(--gold-light); }
+
+  /* ── TAGS ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .tag {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--accent);
+    background: rgba(78,205,196,0.08);
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 100px;
+    padding: 4px 12px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── FOOTER ── */
+  .card-footer {
+    padding: 18px 36px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .author-role {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .institution {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .institution span {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ══════════════════════════════════════
+     CARD LEGENDA (texto para copiar)
+  ══════════════════════════════════════ */
+  .caption-card {
+    width: 100%;
+    max-width: 560px;
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 32px 36px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+    border: 1px solid rgba(212,168,83,0.12);
+  }
+
+  .caption-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .caption-card h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(212,168,83,0.25);
+  }
+
+  .caption-text {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text);
+    opacity: 0.88;
+    white-space: pre-line;
+  }
+
+  .caption-text .emoji { font-style: normal; }
+
+  /* animações de entrada */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .card, .caption-card {
+    animation: fadeUp 0.6s ease both;
+  }
+  .caption-card { animation-delay: 0.15s; }
+
+  @media (max-width: 480px) {
+    .score-pill { width: 56px; height: 56px; top: 28px; right: 20px; }
+    .score-pill .num { font-size: 20px; }
+    .card-hero, .card-body, .card-footer { padding-left: 22px; padding-right: 22px; }
+    .pillars { grid-template-columns: 1fr; }
+    .caption-card { padding: 24px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<p class="page-label">📲 Post para Instagram &amp; LinkedIn</p>
+
+<!-- ═══════════════════ CARD VISUAL ═══════════════════ -->
+<div class="card">
+  <div class="card-header-strip"></div>
+
+  <div class="card-hero">
+    <div class="badge">🏆 &nbsp;Nota 10 · MBA Auditoria &amp; Controladoria</div>
+    <h1>Quando IA e<br>Contabilidade <span>se encontram</span><br>para combater fraudes</h1>
+    <p class="sub">TCC defendido e aprovado com nota máxima — UniAraguaia · Jan 2026</p>
+    <div class="score-pill">
+      <span class="num">10</span>
+      <span class="label">Nota</span>
+    </div>
+  </div>
+
+  <div class="card-body">
+
+    <p class="intro-text">
+      Usei <strong>Lei de Benford + Machine Learning</strong> para criar um sistema que detecta fraudes financeiras automaticamente — analisando <em>2.512 transações</em> em menos de <strong>3 segundos</strong>. 🚀
+    </p>
+
+    <div class="highlight-block">
+      💡 A ideia central: dados financeiros legítimos seguem um padrão matemático natural nos seus dígitos. Quando alguém manipula números, esse padrão quebra — e a IA detecta!
+    </div>
+
+    <div>
+      <p class="pillars-title">Os 3 pilares do modelo</p>
+      <div class="pillars">
+        <div class="pillar">
+          <span class="pillar-icon">📐</span>
+          <div class="pillar-text">
+            <span class="pillar-name">Lei de Benford</span>
+            <span class="pillar-desc">Auditoria numérica dos dígitos</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">🤖</span>
+          <div class="pillar-text">
+            <span class="pillar-name">Machine Learning</span>
+            <span class="pillar-desc">Isolation Forest + LOF</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">🔗</span>
+          <div class="pillar-text">
+            <span class="pillar-name">Fusão de Evidências</span>
+            <span class="pillar-desc">Score integrado de risco</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">👁️</span>
+          <div class="pillar-text">
+            <span class="pillar-name">Human-in-the-Loop</span>
+            <span class="pillar-desc">Auditor valida anomalias</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="results-title">Resultados em números</p>
+      <div class="results-row">
+        <div class="result-chip">
+          <span class="val">–80%</span>
+          <span class="desc">falsos positivos vs método isolado</span>
+        </div>
+        <div class="result-chip">
+          <span class="val">3,6%</span>
+          <span class="desc">transações para revisão humana</span>
+        </div>
+        <div class="result-chip">
+          <span class="val">+95%</span>
+          <span class="desc">confiabilidade nos alertas críticos</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="cta-text">
+      A auditoria do futuro é <strong>híbrida</strong>: estatística clássica + inteligência artificial + julgamento humano. Cada peça sozinha é boa. Juntas? Imbatíveis. 🔥
+    </p>
+
+    <div class="tags">
+      <span class="tag">#AuditoriaBancária</span>
+      <span class="tag">#MachineLearning</span>
+      <span class="tag">#LeiBenford</span>
+      <span class="tag">#DetecçãoDeFraudes</span>
+      <span class="tag">#Controladoria</span>
+      <span class="tag">#IA</span>
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="author">
+      <span class="author-name">Tiago Alves dos Santos</span>
+      <span class="author-role">Especialista MBA · Perícia &amp; Controladoria</span>
+    </div>
+    <div class="institution">
+      <span>UniAraguaia</span><br>
+      Orientadora: Profa. Ma. Luana Machado dos Santos
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ LEGENDA PARA COPIAR ═══════════════════ -->
+<div class="caption-card">
+  <h2>📋 Legenda para copiar</h2>
+  <div class="caption-text">🏆 NOTA 10! E agora preciso compartilhar isso com vocês!
+
+Acabei de defender meu TCC do MBA em Gestão Contábil: Perícia e Controladoria na UniAraguaia — e saí com nota máxima! 🎓✨
+
+Mas o que eu estudei, afinal?
+
+Criei um modelo híbrido que usa Inteligência Artificial para detectar fraudes financeiras automaticamente. Sim, isso mesmo: IA a serviço da auditoria!
+
+🔍 Como funciona?
+
+A Lei de Benford é um princípio matemático que diz que, em dados financeiros reais, o número "1" aparece como primeiro dígito em ~30% das vezes. O "9"? Só ~4,6%. Quando alguém manipula valores artificialmente, esse padrão quebra — e aí entra o meu modelo para pegar essa inconsistência.
+
+Mas só a Lei de Benford não basta. Então combinei ela com algoritmos de Machine Learning (Isolation Forest e LOF) para analisar o comportamento das transações: velocidade suspeita, múltiplos logins, valores incompatíveis com o perfil do cliente...
+
+📊 Os resultados foram incríveis:
+✅ 2.512 transações analisadas em menos de 3 segundos
+✅ 80% menos falsos positivos vs. análise isolada
+✅ Apenas 3,6% das transações precisaram de revisão humana
+✅ +95% de confiabilidade nos alertas críticos
+
+💡 A grande sacada? Nenhuma técnica sozinha resolve. A mágica acontece na FUSÃO — estatística clássica + IA + olhar humano especializado.
+
+Esse trabalho me ensinou que a contabilidade forense do futuro não é sobre substituir o auditor, é sobre dar superpoderes a ele! 🦸
+
+Obrigado à minha orientadora Profa. Ma. Luana Machado dos Santos pelo apoio e à banca examinadora pela avaliação! 🙏
+
+Se você atua em auditoria, controladoria, bancos ou tecnologia financeira, vem trocar ideia nos comentários! 👇
+
+#MBA #Auditoria #Controladoria #MachineLearning #LeiBenford #DetecçãoDeFraudes #ContabilidadeForense #IA #Fintech #Compliance #UniAraguaia #NotaDez 🏆</div>
+</div>
+
+</body>
+</html>
